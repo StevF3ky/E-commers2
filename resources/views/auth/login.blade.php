@@ -1,4 +1,17 @@
-<x-guest-layout>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }} | Login</title>
+
+    @vite(['resources/css/app.css', 'resources/css/IndexAuth.css', 'resources/js/app.js'])
+</head>
+<body class="antialiased">
+    {{-- Memastikan body menggunakan kelas CSS dari IndexAuth.css, misalnya body { display: flex; ... } --}}
+    
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     @if ($errors->any())
@@ -7,6 +20,7 @@
         </div>
     @endif
     
+    {{-- Konten Anda (div.wrapper) sekarang menjadi konten utama body --}}
     <div class="wrapper">
        <form method="POST" action="{{ route('login') }}">
         @csrf 
@@ -46,4 +60,5 @@
             </div>
         </form>
     </div>
-</x-guest-layout>
+</body>
+</html>
