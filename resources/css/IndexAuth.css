@@ -55,7 +55,11 @@ header .ButtonLogo {
     position: absolute;
     width: 100%;
     height: 3px;
+<<<<<<< HEAD
     background: #007bff; 
+=======
+    background: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     left: 0;
     bottom: -5px;
     border-radius: 5px;
@@ -71,19 +75,31 @@ header .ButtonLogo {
     width: 130px;
     height: 50px;
     background: transparent;
+<<<<<<< HEAD
     border: 2px solid #007bff;
+=======
+    border: 2px solid #38761D;
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     outline: none;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1em;
+<<<<<<< HEAD
     color: #007bff; 
+=======
+    color: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     font-weight: 500;
     text-decoration: none;
     margin-left: 30px;
 }
 
 .navigation .ButtonLogin:hover {
+<<<<<<< HEAD
     background: #007bff; 
+=======
+    background: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     color: #FFFFFF; 
     transition: 0.5s;
 }
@@ -145,12 +161,20 @@ header .ButtonLogo {
 }
 
 .remember-forgot label input {
+<<<<<<< HEAD
     accent-color: #007bff; 
+=======
+    accent-color: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     margin-right: 8px;
 }
 
 .remember-forgot a {
+<<<<<<< HEAD
     color: #007bff; 
+=======
+    color: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     text-decoration: none;
 }
 
@@ -164,7 +188,11 @@ header .ButtonLogo {
 .wrapper .btnreset {
     width: 100%;
     height: 50px;
+<<<<<<< HEAD
     background: #007bff; 
+=======
+    background: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     border: none;
     outline: none;
     border-radius: 40px;
@@ -182,7 +210,11 @@ header .ButtonLogo {
 }
 
 .register-link p a {
+<<<<<<< HEAD
     color: #007bff; 
+=======
+    color: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     text-decoration: none;
     font-weight: 600;
 }
@@ -195,9 +227,15 @@ header .ButtonLogo {
     display: inline-block;
     padding: 10px 25px;
     background-color: transparent;
+<<<<<<< HEAD
     border: 2px solid #007bff; 
     border-radius: 6px;
     color: #007bff; 
+=======
+    border: 2px solid #38761D; 
+    border-radius: 6px;
+    color: #38761D; 
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
     text-decoration: none;
     font-weight: 500;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
@@ -208,7 +246,13 @@ header .ButtonLogo {
 }
 
 .wrapper .home:hover {
+<<<<<<< HEAD
     background-color: #007bff; 
     color: #FFFFFF; 
     border-color: #007bff;
+=======
+    background-color: #38761D; 
+    color: #FFFFFF; 
+    border-color: #38761D;
+>>>>>>> 2bacbb1964585033ee4937ec74f057ea86518b58
 }
