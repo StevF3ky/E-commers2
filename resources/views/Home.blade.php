@@ -105,52 +105,52 @@
                 {{-- Ini adalah blok yang idealnya diisi dengan loop @foreach ($products as $product) --}}
                 <div class="product-card">
                     <div class="product-image-placeholder">💻</div>
-                    <p class="product-name">Estetiks Nice 1st</p>
-                    <p class="product-price">189$</p>
-                    <div class="product-rating">⭐⭐⭐⭐</div>
+                    <p class="product-name">test1</p>
+                    <p class="product-price">1891231</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐</div> -->
                 </div>
                 <div class="product-card">
                     <div class="product-image-placeholder">☕</div>
-                    <p class="product-name">Nesca Kowak</p>
-                    <p class="product-price">184$</p>
-                    <div class="product-rating">⭐⭐⭐⭐</div>
+                    <p class="product-name">test2k</p>
+                    <p class="product-price">1844123</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐</div> -->
                 </div>
                 <div class="product-card">
                     <div class="product-image-placeholder">👚</div>
-                    <p class="product-name">Eve. Vleenos S Estetiks</p>
-                    <p class="product-price">184$</p>
-                    <div class="product-rating">⭐⭐⭐⭐</div>
+                    <p class="product-name">test3</p>
+                    <p class="product-price">1841234</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐</div> -->
                 </div>
                 <div class="product-card">
                     <div class="product-image-placeholder">🧴</div>
-                    <p class="product-name">Phonel. Puan Estetiks</p>
-                    <p class="product-price">184$</p>
-                    <div class="product-rating">⭐⭐⭐⭐</div>
+                    <p class="product-name">kopi</p>
+                    <p class="product-price">184123</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐</div> -->
                 </div>
                 <div class="product-card">
                     <div class="product-image-placeholder">💡</div>
-                    <p class="product-name">Llorns Ds My Room</p>
-                    <p class="product-price">184$</p>
-                    <div class="product-rating">⭐⭐⭐⭐</div>
+                    <p class="product-name">test23544</p>
+                    <p class="product-price">184124</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐</div> -->
                 </div>
                 <div class="product-card">
                     <div class="product-image-placeholder">📷</div>
-                    <p class="product-name">Estetiks Fesa Reyonistr</p>
-                    <p class="product-price">184$</p>
-                    <div class="product-rating">⭐⭐⭐⭐</div>
+                    <p class="product-name">test56</p>
+                    <p class="product-price">Rp. 12300321</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐</div> -->
                 </div>
                 <div class="product-card">
                     <div class="product-image-placeholder">⌚</div>
-                    <p class="product-name">Smartwatch X7 Pro</p>
-                    <p class="product-price">220$</p>
-                    <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="product-name">test4</p>
+                    <p class="product-price">2203123</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐⭐</div> -->
                 </div>
 
                 <div class="product-card">
                     <div class="product-image-placeholder">🎧</div>
-                    <p class="product-name">Headset Gaming Z</p>
-                    <p class="product-price">95$</p>
-                    <div class="product-rating">⭐⭐⭐⭐</div>
+                    <p class="product-name">test7</p>
+                    <p class="product-price">95123123</p>
+                    <!-- <div class="product-rating">⭐⭐⭐⭐</div> -->
                 </div>
                 {{-- Batas blok produk --}}
                 </div>
