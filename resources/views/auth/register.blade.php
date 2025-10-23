@@ -8,6 +8,9 @@
     <title>{{ config('app.name', 'Laravel') }} | Register</title>
 
     @vite(['resources/css/app.css', 'resources/css/IndexAuth.css', 'resources/js/app.js'])
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body class="antialiased">
     
