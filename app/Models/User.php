@@ -49,4 +49,29 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // Definisikan peran sebagai konstanta
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_SELLER = 'seller';
+    public const ROLE_BUYER = 'buyer';
+
+    // ... (existing properties)
+
+    // Fungsi untuk mengecek apakah pengguna adalah admin
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    // Fungsi untuk mengecek apakah pengguna adalah seller
+    public function isSeller(): bool
+    {
+        return $this->role === self::ROLE_SELLER;
+    }
+    
+    // Fungsi untuk mengecek apakah pengguna adalah buyer
+    public function isBuyer(): bool
+    {
+        return $this->role === self::ROLE_BUYER;
+    }
+
 }

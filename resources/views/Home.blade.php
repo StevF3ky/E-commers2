@@ -64,6 +64,11 @@
                                             {{ __('Log Out') }}
                                         </button>
                                     </form>
+                                    @if (Auth::user()->role === 'admin')
+                                        <a href="{{ route('admin.users.index') }}" class="dropdown-menu-item">
+                                            {{ __('User Menu') }}
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
