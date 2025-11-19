@@ -1,27 +1,62 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Seller\ProductController;
+use App\Http\Controllers\HomeController; // Pastikan ini ada
+use App\Http\Controllers\CartController;
 
-Route::get('/', function () {
-    return view('Home');
-})->name('Home');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
+// 1. HOMEPAGE (Dinamis - Mengambil Data Produk)
+// PERBAIKAN: Gunakan [HomeController::class, 'index'] agar data produk terkirim
+Route::get('/', [HomeController::class, 'index'])->name('Home'); 
+
+// 2. DETAIL PRODUK (Halaman ketika produk diklik)
+// PERBAIKAN: Tambahkan route ini agar link produk bisa dibuka
+Route::get('/product/{id}', [HomeController::class, 'show'])->middleware('auth')->name('product.show');
+
+
+// 3. DASHBOARD USER BIASA
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+// 4. PROFILE ROUTES
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
 });
 
 
+// 5. ADMIN ROUTES
 Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
+});
+
+
+// 6. SELLER ROUTES
+Route::middleware(['auth', 'auth.seller'])->prefix('seller')->group(function () {
+    
+    // Dashboard Seller
+    Route::get('/dashboard', [ProductController::class, 'index'])->name('seller.dashboard');
+    
+    // CRUD Produk
+    Route::post('/products', [ProductController::class, 'store'])->name('seller.products.store');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('seller.products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('seller.products.destroy');
+
 });
 
 require __DIR__.'/auth.php';

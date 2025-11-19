@@ -13,14 +13,14 @@
     
 </head>
 <body>
-
     <header class="navbar-fixed">
-        <div class="navbar-wrapper">
-            
-            <div class="navbar-left">
+        <div class="navbar-wrapper">   
+           <div class="navbar-left">
                 <div class="logo">
+                    <a href="{{ route('Home') }}" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 3px; cursor: pointer;">
                     <ion-icon name="cart-outline" class="cart-icon"></ion-icon>
-                    <h1>Beliin</h1>
+                    <h1>Beliin</h1> 
+                    </a>
                 </div>
             </div>
             
@@ -36,7 +36,9 @@
             <div class="navbar-right">
                 @if (Route::has('login'))
                     @auth
-                      
+                        <a href="{{ route('checkout') }}" style="position: relative; color: #333; font-size: 26px; text-decoration: none; padding-right: 20px; padding-top: 8px;">
+                            <ion-icon name="cart-outline"></ion-icon>
+                        </a>
                         <div x-data="{ open: false }" @click.outside="open = false" class="relative profile-dropdown">
                             <button @click="open = ! open" class="profile-icon-btn">
                                 <ion-icon name="person-circle-outline" class="profile-icon-size"></ion-icon>
@@ -57,18 +59,25 @@
                                     <a href="{{ route('profile.edit') }}" class="dropdown-menu-item">
                                         {{ __('Profile') }}
                                     </a>
+                                    
+                                    @if (Auth::user() -> role === 'seller')
+                                        <a href="{{ route('seller.dashboard') }}" class="dropdown-menu-item">
+                                            {{ __('Seller Menu') }}
+                                        </a>
+                                        @endif
+
+                                       @if (Auth::user()->role === 'admin')
+                                        <a href="{{ route('admin.users.index') }}" class="dropdown-menu-item">
+                                            {{ __('User Menu') }}
+                                        </a>
+                                        @endif 
 
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-menu-item logout-btn">
                                             {{ __('Log Out') }}
                                         </button>
-                                    </form>
-                                    @if (Auth::user()->role === 'admin')
-                                        <a href="{{ route('admin.users.index') }}" class="dropdown-menu-item">
-                                            {{ __('User Menu') }}
-                                        </a>
-                                    @endif
+                                    </form>                        
                                 </div>
                             </div>
                         </div>
@@ -85,13 +94,11 @@
                         </nav>
                     @endauth
                 @endif
-            </div>
-            
+            </div>    
         </div>
     </header>
 
     <main class="content-wrapper">
-
         <section class="banner-section">
             <div class="section-header">
                 <h2>Rekomendasi Terbaik Mencari Product</h2>
@@ -129,50 +136,37 @@
         <section class="product-section">
             <h2>Produk Beliin</h2>
             <div class="product-grid">
-                {{-- Ini adalah blok yang idealnya diisi dengan loop @foreach ($products as $product) --}}
-                <div class="product-card">
-                    <div class="product-image-placeholder">💻</div>
-                    <p class="product-name">test1</p>
-                    <p class="product-price">1891231</p>
-                    </div>
-                <div class="product-card">
-                    <div class="product-image-placeholder">☕</div>
-                    <p class="product-name">test2k</p>
-                    <p class="product-price">1844123</p>
-                    </div>
-                <div class="product-card">
-                    <div class="product-image-placeholder">👚</div>
-                    <p class="product-name">test3</p>
-                    <p class="product-price">1841234</p>
-                    </div>
-                <div class="product-card">
-                    <div class="product-image-placeholder">🧴</div>
-                    <p class="product-name">kopi</p>
-                    <p class="product-price">184123</p>
-                    </div>
-                <div class="product-card">
-                    <div class="product-image-placeholder">💡</div>
-                    <p class="product-name">test23544</p>
-                    <p class="product-price">184124</p>
-                    </div>
-                <div class="product-card">
-                    <div class="product-image-placeholder">📷</div>
-                    <p class="product-name">test56</p>
-                    <p class="product-price">Rp. 12300321</p>
-                    </div>
-                <div class="product-card">
-                    <div class="product-image-placeholder">⌚</div>
-                    <p class="product-name">test4</p>
-                    <p class="product-price">2203123</p>
-                    </div>
+                {{-- Mulai Looping Data Produk dari Database --}}
+                @forelse($products as $product)
+                    {{-- Bungkus kartu dengan Link ke Halaman Detail --}}
+                    <a href="{{ route('product.show', $product->product_id) }}" style="text-decoration: none; color: inherit;">
+                        <div class="product-card">
+                            
+                            {{-- Logika Gambar: Tampilkan foto jika ada, jika tidak pakai icon --}}
+                            <div class="product-image-placeholder" style="padding: 0; overflow: hidden; position: relative;">
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" 
+                                        alt="{{ $product->name }}" 
+                                        style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                                @else
+                                    <span style="font-size: 40px;">📦</span>
+                                @endif
+                            </div>
 
-                <div class="product-card">
-                    <div class="product-image-placeholder">🎧</div>
-                    <p class="product-name">test7</p>
-                    <p class="product-price">95123123</p>
+                            {{-- Nama Produk --}}
+                            <p class="product-name">{{ $product->name }}</p>
+
+                            {{-- Harga Produk (Format Rupiah: Rp 10.000) --}}
+                            <p class="product-price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                        </div>
+                    </a>
+                @empty
+                    {{-- Tampilan jika database kosong --}}
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: #666;">
+                        <p>Belum ada produk yang tersedia saat ini.</p>
                     </div>
-                {{-- Batas blok produk --}}
-                </div>
+                @endforelse
+            </div>
         </section>
         
     </main>
