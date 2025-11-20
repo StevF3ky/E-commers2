@@ -5,24 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Manajemen Pengguna</title>
     
-    {{-- 1. Font Inter (Sama seperti Home) --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    {{-- 2. Import CSS & JS --}}
-    {{-- Kita tambahkan 'resources/css/Home.css' agar navbar terlihat sama --}}
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/Home.css'])
-
-    {{-- 3. Import IonIcons (Untuk ikon navbar) --}}
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
     <style>
         body {
             font-family:  sans-serif;
             background-color: #F4F2EE;
-            padding-top: 80px; /* Tambahan padding agar konten tidak tertutup navbar fixed */
+            padding-top: 80px; 
         }
-        /* Override sedikit agar tabel tidak terlalu lebar di layar besar */
         .admin-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -31,30 +23,21 @@
     </style>
 </head>
 <body>
-
-    {{-- === NAVBAR (Diambil dari Home.blade.php) === --}}
-    <header class="navbar-fixed">
-        <div class="navbar-wrapper">
-            
-            {{-- Bagian Kiri: Logo --}}
+    <header class="navbar-fixed"> 
+        <div class="navbar-wrapper" >  
             <div class="navbar-left">
-                <a href="{{ route('Home') }}" class="logo" style="text-decoration: none;">
+                <a href="{{ route('Home') }}" class="logo">
                     <ion-icon name="cart-outline" class="cart-icon"></ion-icon>
                     <h1>Beliin</h1>
                 </a>
             </div>
             
-            
-
-            {{-- Bagian Kanan: Profile Dropdown --}}
             <div class="navbar-right">
                 <div x-data="{ open: false }" @click.outside="open = false" class="relative profile-dropdown">
-                    <button @click="open = ! open" class="profile-icon-btn" style="display: flex; align-items: center; gap: 5px;">
+                    <button @click="open = ! open" class="profile-icon-btn" style="display: flex; align-items: center;">
                         <ion-icon name="person-circle-outline" class="profile-icon-size"></ion-icon>
-                        <span style="font-size: 14px; font-weight: 600; color: #333;"></span>
                     </button>
 
-                    {{-- Dropdown Menu --}}
                     <div x-show="open" 
                         x-transition:enter="transition ease-out duration-100" 
                         x-transition:enter-start="transform opacity-0 scale-95" 
@@ -66,49 +49,42 @@
                         style="display: none; position: absolute; right: 0; top: 100%; background: white; border: 1px solid #ddd; border-radius: 8px; width: 150px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" 
                     >
                         <div class="py-1">
-                            <a href="{{ route('profile.edit') }}" class="dropdown-menu-item" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 14px;">
+                            <a href="{{ route('profile.edit') }}" class="dropdown-menu-item" >
                                 {{ __('Profile') }}
                             </a>
-
+                            
                             <a href="{{ route('admin.users.index') }}" class="dropdown-menu-item">
-                                            {{ __('User Menu') }}
+                                {{ __('User Menu') }}
                             </a>
 
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="dropdown-menu-item logout-btn" style="width: 100%; text-align: left; padding: 10px 15px; background: none; border: none; cursor: pointer; font-size: 14px; color: #d9534f;">
+                                <button type="submit" class="dropdown-menu-item logout-btn" >
                                     {{ __('Log Out') }}
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div>  
         </div>
     </header>
 
-    {{-- === KONTEN UTAMA ADMIN === --}}
-    <div class="admin-container">
-        
+   
+    <div class="admin-container">  
         <div class="flex justify-between items-center mb-6 mt-4">
             <h2 class="text-2xl font-bold text-gray-800">Manajemen Pengguna</h2>
             <span class="text-sm text-gray-500 bg-white px-3 py-1 rounded shadow-sm border">Total Pengguna: {{ $users->count() }}</span>
         </div>
-
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
             <div class="p-6 text-gray-900">
-                <h3 class="text-lg font-semibold mb-6 text-gray-700 border-b pb-2">Daftar Pengguna (Buyer & Seller)</h3>
-                
-                {{-- Notifikasi --}}
+                <h3 class="text-lg font-semibold mb-6 text-gray-700 border-b pb-2">Daftar Pengguna (Buyer & Seller)</h3>    
                 @if (session('status'))
                     <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded shadow-sm flex items-center">
                         <ion-icon name="checkmark-circle" class="mr-2 text-xl"></ion-icon>
                         {{ session('status') }}
                     </div>
                 @endif
-
-                {{-- Tabel --}}
                 <div class="overflow-x-auto rounded-lg border border-gray-100">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -154,7 +130,7 @@
                                                 @elseif ($user->isSeller())
                                                     <input type="hidden" name="role" value="{{ App\Models\User::ROLE_BUYER }}">
                                                     <button type="submit" class="inline-flex items-center px-3 py-1.5 border border-red-300 text-red-600 bg-white hover:bg-red-50 rounded-md text-xs font-bold tracking-wide shadow-sm transition ease-in-out duration-150">
-                                                        <ion-icon name="person-outline" class="mr-1"></ion-icon> Turunkan ke Buyer
+                                                        <ion-icon name="person-outline" class="mr-1"></ion-icon> Jadikan Buyer
                                                     </button>
                                                 @endif
                                             </form>
@@ -167,12 +143,10 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
-
 </body>
 </html>
-```
+
 

@@ -7,8 +7,10 @@
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="{{ asset('js/checkout.js') }}"></script>
     
     <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 
@@ -51,20 +53,23 @@
                                 </div>
 
                                 <div class="item-actions">
-                                    <div class="qty-group">
-                                        <span class="qty-val">{{ $item->quantity }}</span>
-                                    </div>
-                                    
-                                    <div style="font-weight: 600; font-size: 14px;">
+                                    <div style="font-weight: 600; font-size: 14px; margin-bottom: 10px;" id="line-total-{{ $item->cart_item_id }}">
                                         Rp {{ number_format($lineTotal, 0, ',', '.') }}
                                     </div>
 
-                                    <form action="{{ route('cart.remove', $item->cart_item_id) }}" method="POST" style="display:inline;">
+                                    <form action="{{ route('cart.remove', $item->cart_item_id) }}" method="POST" style="display:inline; margin-bottom: 10px;">
                                         @csrf
-                                        @method('DELETE') <button type="submit" class="remove-btn" onclick="return confirm('Yakin ingin menghapus produk ini?')">
-                                            <i class="fas fa-trash"></i> Hapus
+                                        @method('DELETE') 
+                                        <button type="submit" class="remove-btn" onclick="return confirm('Yakin ingin menghapus produk ini?')">
+                                            <i class="fas fa-trash"></i>Hapus
                                         </button>
                                     </form>
+
+                                    <div class="qty-group" style="margin-top: 10px;">
+                                        <button class="qty-btn" onclick="updateQuantity('{{$item->cart_item_id }}', -1)">-</button>
+                                        <span class="qty-val" id="qty-val-{{ $item->cart_item_id }}">{{ $item->quantity }}</span>   
+                                        <button class="qty-btn" onclick="updateQuantity('{{ $item->cart_item_id }}', 1)">+</button>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -104,6 +109,6 @@
 
     </div>
 
-    <script src="{{ asset('js/checkout.js') }}"></script>
+    
 </body>
 </html>

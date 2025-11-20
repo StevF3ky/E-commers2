@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    // 1. Fungsi Tambah ke Keranjang (Dipanggil via AJAX)
+   
     public function addToCart(Request $request)
     {
         if (!Auth::check()) {
@@ -20,20 +20,20 @@ class CartController extends Controller
         $productId = $request->input('product_id');
         $quantity = $request->input('quantity');
 
-        // Cek apakah user sudah punya keranjang? Jika belum, buat baru.
+        
         $cart = Cart::firstOrCreate(['user_id' => $user->user_id]);
 
-        // Cek apakah barang ini sudah ada di keranjang?
+       
         $cartItem = CartItem::where('cart_id', $cart->cart_id)
                             ->where('product_id', $productId)
                             ->first();
 
         if ($cartItem) {
-            // Jika sudah ada, update jumlahnya
+            
             $cartItem->quantity += $quantity;
             $cartItem->save();
         } else {
-            // Jika belum, buat item baru
+            
             CartItem::create([
                 'cart_id' => $cart->cart_id,
                 'product_id' => $productId,
@@ -41,7 +41,7 @@ class CartController extends Controller
             ]);
         }
 
-        // Hitung total item di keranjang untuk update badge
+        
         $totalItems = $cart->items()->sum('quantity');
 
         return response()->json([
@@ -51,7 +51,7 @@ class CartController extends Controller
         ]);
     }
 
-    // 2. Halaman Checkout / Keranjang
+    
     public function checkout()
     {
         if (!Auth::check()) {
@@ -65,10 +65,10 @@ class CartController extends Controller
 
     public function removeItem($id)
     {
-        // Cari item berdasarkan ID
+        
         $cartItem = CartItem::where('cart_item_id', $id)->first();
 
-        // Jika ketemu, hapus
+        
         if ($cartItem) {
             $cartItem->delete();
             return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang.');
@@ -76,4 +76,35 @@ class CartController extends Controller
 
         return redirect()->back()->with('error', 'Item tidak ditemukan.');
     }
+
+    public function updateQuantity(Request $request, $id)
+    {
+    $request->validate([
+        'change' => 'required|integer'
+    ]);
+    $cartItem = CartItem::where('cart_item_id', $id)->first();
+    if (!$cartItem) {
+        return response()->json(['status' => 'error', 'message' => 'Item tidak ditemukan'], 404);
+    }
+    $newQuantity = $cartItem->quantity + $request->change;
+    if ($newQuantity < 1) {
+        return response()->json(['status' => 'error', 'message' => 'Minimal pembelian 1 item']);
+    }
+    $cartItem->quantity = $newQuantity;
+    $cartItem->save(); 
+    $lineTotal = $cartItem->quantity * $cartItem->product->price;
+    $cart = Cart::with('items.product')->find($cartItem->cart_id);
+    $subtotal = 0;
+    foreach($cart->items as $item) {
+        $subtotal += $item->quantity * $item->product->price;
+    }
+    return response()->json([
+        'status' => 'success',
+        'new_quantity' => $newQuantity,
+        'new_line_total' => 'Rp ' . number_format($lineTotal, 0, ',', '.'),
+        'new_subtotal' => 'Rp ' . number_format($subtotal, 0, ',', '.')
+    ]);
+    }
+
+    
 }

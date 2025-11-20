@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
-    // Sesuaikan dengan primary key di migration Anda
     protected $primaryKey = 'product_id'; 
 
     protected $fillable = [
@@ -21,7 +19,7 @@ class Product extends Model
         'category_id',
     ];
 
-    // Relasi ke Kategori
+    
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'category_id');

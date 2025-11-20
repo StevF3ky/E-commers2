@@ -12,22 +12,20 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // 1. Ambil data dari Database
+       
         $products = Product::with('category')->latest()->get();
         $categories = Category::all();
 
-        // 2. LAKUKAN PERHITUNGAN (Ini yang hilang sebelumnya)
-        $totalProducts = $products->count(); // Menghitung jumlah produk
-        $totalStock = $products->sum('stock'); // Menjumlahkan total stok
+      
+        $totalProducts = $products->count(); 
+        $totalStock = $products->sum('stock'); 
 
-        // 3. Kirim variabel hasil hitungan ke View
-        // Perhatikan bagian 'compact', pastikan ejaannya sama persis
         return view('seller.sellerdashboard', compact('products', 'categories', 'totalProducts', 'totalStock'));
     }
 
     public function store(Request $request)
     {
-        // Validasi Input
+        
         $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
@@ -36,13 +34,12 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048', 
         ]);
 
-        // Proses Upload Gambar
+        
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
         }
 
-        // Simpan ke Database
         Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -74,12 +71,12 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // Ambil semua data input
+        
         $data = $request->except(['image']);
 
-        // Cek jika ada gambar baru diupload
+      
         if ($request->hasFile('image')) {
-            // (Opsional: Hapus gambar lama disini jika perlu)
+            
             $data['image'] = $request->file('image')->store('products', 'public');
         }
 

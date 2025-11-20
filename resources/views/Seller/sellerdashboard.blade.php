@@ -136,7 +136,7 @@
                             </span>
                         </td>
                         <td>
-                            <button onclick="editProduct({{json_encode($product) }})" class="action-btn btn-edit" style="color: var(--accent-color); margin-right: 5px;">
+                            <button onclick="editProduct('{{json_encode($product) }}')" class="action-btn btn-edit" style="color: var(--accent-color); margin-right: 5px;">
                                 <ion-icon name="create-outline"></ion-icon>
                             </button>
 

@@ -24,13 +24,13 @@
                 </div>
             </div>
             
-            <div class="navbar-center">
-                <div class="search-bar">
-                    <input type="text" placeholder="Cari produk, merek...">
-                    <button class="search-btn">
+            <div class="navbar-center">  
+                <form action="{{ route('Home') }}" method="GET" class="search-bar">     
+                    <input type="text" name="search" placeholder="Cari produk, merek..." value="{{ request('search') }}">  
+                    <button type="submit" class="search-btn">
                         <ion-icon name="search-outline"></ion-icon>
                     </button>
-                </div>
+                </form>
             </div>
 
             <div class="navbar-right">
@@ -43,8 +43,6 @@
                             <button @click="open = ! open" class="profile-icon-btn">
                                 <ion-icon name="person-circle-outline" class="profile-icon-size"></ion-icon>
                             </button>
-
-                            {{-- Dropdown Menu --}}
                             <div x-show="open" 
                                 x-transition:enter="transition ease-out duration-100" 
                                 x-transition:enter-start="transform opacity-0 scale-95" 
@@ -53,25 +51,21 @@
                                 x-transition:leave-start="transform opacity-100 scale-100" 
                                 x-transition:leave-end="transform opacity-0 scale-95" 
                                 class="dropdown-menu"
-                                style="display: none;" 
-                            >
+                                style="display: none;">
                                 <div class="py-1">
                                     <a href="{{ route('profile.edit') }}" class="dropdown-menu-item">
                                         {{ __('Profile') }}
                                     </a>
-                                    
                                     @if (Auth::user() -> role === 'seller')
                                         <a href="{{ route('seller.dashboard') }}" class="dropdown-menu-item">
                                             {{ __('Seller Menu') }}
                                         </a>
                                         @endif
-
                                        @if (Auth::user()->role === 'admin')
                                         <a href="{{ route('admin.users.index') }}" class="dropdown-menu-item">
                                             {{ __('User Menu') }}
                                         </a>
-                                        @endif 
-
+                                        @endif
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-menu-item logout-btn">
@@ -102,19 +96,16 @@
         <section class="banner-section">
             <div class="section-header">
                 <h2>Rekomendasi Terbaik Mencari Product</h2>
-            </div>
-            
+            </div> 
             <div class="banners-grid">
                 <div class="banner-card main-banner">
                     <div class="banner-content">
-                        <h3>Membeli Produk <br> Brand Ternama Hemat!</h3>
-                        
+                        <h3>Membeli Produk <br> Brand Ternama Hemat!</h3> 
                     </div>
                     <div class="banner-image">
                         <span class="icon-placeholder">🖥️</span>
                     </div>
                 </div>
-
                 <div class="banner-card promo-banner promo-makanan">
                     <span class="banner-label">MAKANAN</span>
                     <div class="promo-info">
@@ -122,7 +113,6 @@
                     </div>
                     <span class="icon-placeholder small-icon">🍎</span>
                 </div>
-
                 <div class="banner-card promo-banner promo-belanja">
                     <span class="banner-label">BELANJA</span>
                     <div class="promo-info">
@@ -136,13 +126,9 @@
         <section class="product-section">
             <h2>Produk Beliin</h2>
             <div class="product-grid">
-                {{-- Mulai Looping Data Produk dari Database --}}
                 @forelse($products as $product)
-                    {{-- Bungkus kartu dengan Link ke Halaman Detail --}}
                     <a href="{{ route('product.show', $product->product_id) }}" style="text-decoration: none; color: inherit;">
                         <div class="product-card">
-                            
-                            {{-- Logika Gambar: Tampilkan foto jika ada, jika tidak pakai icon --}}
                             <div class="product-image-placeholder" style="padding: 0; overflow: hidden; position: relative;">
                                 @if($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}" 
@@ -152,16 +138,11 @@
                                     <span style="font-size: 40px;">📦</span>
                                 @endif
                             </div>
-
-                            {{-- Nama Produk --}}
-                            <p class="product-name">{{ $product->name }}</p>
-
-                            {{-- Harga Produk (Format Rupiah: Rp 10.000) --}}
+                            <p class="product-name">{{ $product->name }}</p>        
                             <p class="product-price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
                         </div>
                     </a>
-                @empty
-                    {{-- Tampilan jika database kosong --}}
+                @empty     
                     <div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: #666;">
                         <p>Belum ada produk yang tersedia saat ini.</p>
                     </div>

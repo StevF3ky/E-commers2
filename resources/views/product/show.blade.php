@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    {{-- 1. WAJIB ADA: Token CSRF untuk keamanan request AJAX --}}
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <title>{{ $product->name }} - Detail Produk</title>
@@ -54,7 +54,7 @@
                 <div class="qty-control">
                     <button class="qty-btn" id="btnMinus"><ion-icon name="remove-outline"></ion-icon></button>
                     
-                    {{-- Input qty dengan data stok maksimal --}}
+                    
                     <input type="number" value="1" class="qty-input" id="qtyInput" readonly data-max-stock="{{ $product->stock }}">
                     
                     <button class="qty-btn" id="btnPlus"><ion-icon name="add-outline"></ion-icon></button>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="action-buttons">  
-                {{-- 3. WAJIB ADA: data-product-id agar JS tahu produk mana yang diambil --}}
+                
                 <button class="btn btn-primary" onclick="addToCart()" data-product-id="{{ $product->product_id }}">
                     <ion-icon name="cart"></ion-icon> Tambah Keranjang
                 </button>

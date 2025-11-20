@@ -1,4 +1,4 @@
-/* public/css/checkout.css */
+
 
 :root {
     --primary: #111827;
@@ -20,18 +20,18 @@ body {
     padding-bottom: 80px;
 }
 
-/* --- Utilities --- */
+
 .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
 h1 { font-size: 28px; font-weight: 700; margin-bottom: 30px; color: var(--primary); }
 
-/* --- Layout Grid --- */
+
 .checkout-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 30px;
 }
 
-/* --- Cart Items (Left) --- */
+
 .cart-section {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -91,7 +91,7 @@ h1 { font-size: 28px; font-weight: 700; margin-bottom: 30px; color: var(--primar
 }
 .remove-btn:hover { text-decoration: underline; }
 
-/* --- Summary (Right) --- */
+
 .summary-section {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -124,12 +124,12 @@ h1 { font-size: 28px; font-weight: 700; margin-bottom: 30px; color: var(--primar
 }
 .checkout-btn:hover { background: #1d4ed8; }
 
-/* --- Empty State --- */
+
 .empty-state { text-align: center; padding: 50px; }
 .empty-icon { font-size: 60px; color: #d1d5db; margin-bottom: 20px; }
 .btn-back { text-decoration: none; color: var(--accent); font-weight: 600; }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .checkout-grid { grid-template-columns: 1fr; }
     .summary-section { position: static; }

@@ -79,7 +79,6 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                {{-- BARU: Link Khusus Admin (Responsive) --}}
                 @if (Auth::user()->role === 'admin')
                     <x-responsive-nav-link :href="route('admin.users.index')" class="!text-red-600 !font-bold">
                         {{ __('User Menu (Admin)') }}

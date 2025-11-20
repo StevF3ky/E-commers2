@@ -1,4 +1,4 @@
-/* public/css/product-detail.css */
+
 
 :root {
     --primary: #111827;
@@ -14,12 +14,12 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #F4F2EE; /* Sedikit abu-abu agar kontras dengan card */
+    background-color: #F4F2EE; 
     color: var(--text);
     padding-bottom: 80px;
 }
 
-/* --- Navbar --- */
+
 .navbar {
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
@@ -60,7 +60,7 @@ body {
     border: 2px solid white;
 }
 
-/* --- Main Container --- */
+
 .main-container {
     max-width: 1100px;
     margin: 30px auto;
@@ -70,7 +70,7 @@ body {
     gap: 40px;
 }
 
-/* Left: Image Gallery */
+
 .image-section {
     background: white;
     border-radius: var(--radius);
@@ -88,7 +88,7 @@ body {
     border-radius: 8px;
 }
 
-/* Right: Info */
+
 .info-section {
     display: flex;
     flex-direction: column;
@@ -111,11 +111,11 @@ body {
 
 .divider { height: 1px; background: var(--border); margin: 20px 0; }
 
-/* Description */
+
 .section-label { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 10px; display: block; }
 .description-text { color: var(--text-muted); line-height: 1.6; font-size: 15px; margin-bottom: 20px; text-align: justify; }
 
-/* Quantity Control */
+
 .qty-control {
     display: flex;
     align-items: center;
@@ -142,10 +142,10 @@ body {
     font-weight: 600; font-size: 16px;
 }
 
-/* Stock Info */
+
 .stock-info { margin-left: 15px; font-size: 14px; color: var(--text-muted); }
 
-/* Action Buttons */
+
 .action-buttons {
     display: flex; gap: 15px; margin-top: auto;
 }
@@ -173,7 +173,7 @@ body {
 }
 .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
 
-/* Toast Notification */
+
 .toast {
     position: fixed; bottom: 30px; left: 50%;
     transform: translateX(-50%) translateY(100px);
@@ -186,7 +186,7 @@ body {
 }
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .main-container { grid-template-columns: 1fr; }
     .image-section { margin-bottom: 20px; }

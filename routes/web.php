@@ -4,21 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Seller\ProductController;
-use App\Http\Controllers\HomeController; // Pastikan ini ada
+use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\CartController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
 
-// 1. HOMEPAGE (Dinamis - Mengambil Data Produk)
-// PERBAIKAN: Gunakan [HomeController::class, 'index'] agar data produk terkirim
+// 1. HOME PAGE
 Route::get('/', [HomeController::class, 'index'])->name('Home'); 
 
-// 2. DETAIL PRODUK (Halaman ketika produk diklik)
-// PERBAIKAN: Tambahkan route ini agar link produk bisa dibuka
+// 2. PRODUCT DETAIL PAGE
 Route::get('/product/{id}', [HomeController::class, 'show'])->middleware('auth')->name('product.show');
 
 
@@ -36,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
+    Route::patch('/cart/update/{id}', [CartController::class, 'updateQuantity'])->name('cart.update');
 });
 
 
@@ -43,16 +37,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
+    Route::get('/users/{id}/products', [UserController::class, 'showSellerProducts'])->name('admin.users.products');
 });
 
 
 // 6. SELLER ROUTES
-Route::middleware(['auth', 'auth.seller'])->prefix('seller')->group(function () {
-    
-    // Dashboard Seller
+Route::middleware(['auth', 'auth.seller'])->prefix('seller')->group(function () {   
     Route::get('/dashboard', [ProductController::class, 'index'])->name('seller.dashboard');
-    
-    // CRUD Produk
     Route::post('/products', [ProductController::class, 'store'])->name('seller.products.store');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('seller.products.update');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('seller.products.destroy');

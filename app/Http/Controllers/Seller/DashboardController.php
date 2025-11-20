@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Seller; // <--- Namespace Wajib Benar
+namespace App\Http\Controllers\Seller; 
 
 
 use App\Http\Controllers\Controller;
@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Mengambil file dari folder: resources/views/seller/dashboard.blade.php
+        
         return view('seller.sellerdashboard'); 
     }
 }
