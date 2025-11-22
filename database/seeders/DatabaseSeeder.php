@@ -16,21 +16,6 @@ class DatabaseSeeder extends Seeder
         Category::create(['name' => 'Pakaian']);
         Category::create(['name' => 'Elektronik']);
         Category::create(['name' => 'Lain-lain']);
-        
-
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'role' => User::ROLE_ADMIN,
-        ]);
-
-        user::factory()->create([
-            'name' => 'Seller',
-            'email' => 'seller@gmail.com',
-            'role' => User::ROLE_SELLER,
-            'password' => 'seller123',
-        ]);
-
     }
 
 }
